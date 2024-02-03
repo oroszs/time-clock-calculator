@@ -1,50 +1,99 @@
 :root {
-    --time-wrapper-margin: 40px;
+    --time-wrapper-background: rgb(16, 117, 41);
+    --light-bg: rgb(121, 236, 142);
 }
 body {
     background: rgb(148, 211, 205);
     margin: 0;
 }
+input {
+    width: 90%;
+}
+input[type="time"]{
+    background: none;
+    font-size: 14pt;
+    border: none;
+    width: fit-content;
+}
+h2, h3, p {
+    margin: 0;
+}
 #wrapper {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
     display: flex;
-    flex: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.hour-heading {
+    background: var(--light-bg);
+    padding: 5px;
+    border-radius: 5px;
 }
 #main-time-wrapper {
     position: relative;
     width: 90%;
-    height: 500px;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    margin: auto;
     flex:none;
     flex-wrap: wrap;
-    margin: 50px;
-    background: rgb(16, 117, 41);
+    background: var(--time-wrapper-background);
     border-radius: 10px;
     box-shadow: 10px 10px 20px black;
+    margin: 10px;
+}
+#weekly-time-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    flex: none;
+    background: var(--time-wrapper-background);
+    border-radius: 20px;
+    width: fit-content;
+    padding: 20px;
+    box-shadow: 10px 10px 20px black;
+    height: 100px;
+    margin: 10px;
+}
+.day-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--light-bg);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    height: 220px;
+    padding: 5px;
 }
 .time-wrapper {
     box-sizing: border-box;
-    background: rgb(121, 236, 142);
-    width: 200px;
-    height: 200px;
     flex: none;
-    margin-left: var(--time-wrapper-margin);
-    margin-right: var(--time-wrapper-margin);
-    font-size: 20pt;
     text-align: center;
-    border-radius: 10px;
-    padding: 20px;
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    align-items: center;
+    justify-items: center;
 }
-.day-off {
+.no-meal {
+    grid-template: 2fr / 1fr 1fr;
+}
+.time-div {
+    background: rgb(217, 255, 219);
+    width: 150px;
+    height: 75px;
+    flex: none;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.weekend {
     opacity: .5;
 }
