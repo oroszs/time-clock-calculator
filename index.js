@@ -42,7 +42,7 @@ const calculateTime = () => {
         let splitString = hourString.split(' ');
         let dayHours = 0;
         if(splitString[0] !== 'Day') dayHours = splitString[0];
-        totalHours += parseInt(dayHours);
+        totalHours += parseFloat(dayHours);
     });
     let weeklyHours = 0;
     let otHours = 0;
@@ -52,10 +52,12 @@ const calculateTime = () => {
     } else {
         weeklyHours = totalHours;
     }
+    let roundedWeekly = Math.round(weeklyHours * 100) / 100;
+    let roundedOt = Math.round(otHours * 100) / 100;
     let weeklyHourEl = document.querySelector('#weekly-hours');
     let otHoursEl = document.querySelector('#overtime-hours');
-    weeklyHourEl.textContent = `Standard Hours: ${weeklyHours}`;
-    otHours > 0 ? otHoursEl.textContent = `Overtime Hours: ${otHours}` : otHoursEl.textContent = `Overtime Hours: 0`;
+    weeklyHourEl.textContent = `Standard Hours: ${roundedWeekly}`;
+    otHours > 0 ? otHoursEl.textContent = `Overtime Hours: ${roundedOt}` : otHoursEl.textContent = `Overtime Hours: 0`;
 }
 
 const setTriggers = () => {
