@@ -44,6 +44,38 @@ h2, h3, p {
     box-shadow: 10px 10px 20px black;
     margin: 10px;
 }
+#left-menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 150px;
+}
+#menu-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+}
+#default-wrapper {
+    flex: none;
+    width: 250px;
+    height: 50px;
+}
+#days-off-wrapper {
+    width: 250px;
+    height: 50px;
+}
+.menu-button {
+    background: var(--time-wrapper-background);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 10px 10px 20px black;
+}
 #weekly-time-wrapper {
     display: flex;
     flex-direction: column;
@@ -55,9 +87,23 @@ h2, h3, p {
     border-radius: 20px;
     width: fit-content;
     padding: 20px;
-    box-shadow: 10px 10px 20px black;
     height: 100px;
     margin: 10px;
+}
+#from-home-wrapper {
+    width: 250px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: var(--time-wrapper-background);
+    flex: none;
+    border-radius: 20px;
+}
+.menu-heading {
+    color: white;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .day-wrapper {
     display: flex;
