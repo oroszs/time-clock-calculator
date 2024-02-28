@@ -46,6 +46,12 @@ const calculateTime = () => {
     });
     let weeklyHours = 0;
     let otHours = 0;
+    let wfhHoursInput = document.querySelector('#wfhHours');
+    let wfhHours = parseInt(wfhHoursInput.value);
+    let wfhMinutesInput = document.querySelector('#wfhMinutes');
+    let wfhMinutes = parseFloat(wfhMinutesInput.value);
+    wfhHours += (wfhMinutes / 60);
+    totalHours += wfhHours;
     if(totalHours > 40) {
         otHours = totalHours - 40;
         weeklyHours = 40;
@@ -61,7 +67,12 @@ const calculateTime = () => {
 }
 
 const setTriggers = () => {
-    let inputs = document.querySelectorAll('input[type="time"]');
+    let timeInputs = document.querySelectorAll('input[type="time"]');
+    let wfhEl = document.querySelector('#from-home-wrapper');
+    let wfhInputs = wfhEl.querySelectorAll('input[type="number"]');
+    let inputs = [];
+    timeInputs.forEach(tI => inputs.push(tI));
+    wfhInputs.forEach(wfhI => inputs.push(wfhI));
     inputs.forEach(input => {
         input.onchange = () => {
             calculateTime();
