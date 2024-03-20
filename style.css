@@ -30,6 +30,7 @@ h2, h3, p {
     border-radius: 5px;
 }
 #main-time-wrapper {
+    box-sizing: border-box;
     position: relative;
     width: auto;
     height: fit-content;
@@ -172,5 +173,18 @@ h2, h3, p {
     }
     #main-time-wrapper {
         width: 400px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .time-div {
+        width: 100px;
+        font-size: 1em;
+    }
+    input[type="time"]{
+        font-size: 1em;
+        width: fit-content;
+    }
+    #main-time-wrapper {
+        width: 280px;
     }
 }
