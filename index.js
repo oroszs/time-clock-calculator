@@ -3,8 +3,29 @@ window.onload = () => {
 }
 
 const initialize = () => {
+    let obj = getSettings();
+    applySettings(obj);
     calculateTime();
     setTriggers();
+}
+
+const getSettings = () => {
+    let settingsObj = window.localStorage.getItem("settings");
+    if(settingsObj == null) {
+        settingsObj = {
+            daysOff: [0,0,1,1,0,0,0]
+        }
+    }
+    return settingsObj;
+}
+
+const applySettings = (obj) => {
+    let days = document.querySelectorAll('.day-wrapper');
+    for (let i = 0; i < days.length; i++) {
+        if(obj.daysOff[i] === 1) {
+            days[i].className += " weekend";
+        }
+    }
 }
 
 const calculateTime = () => {
