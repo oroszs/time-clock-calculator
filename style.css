@@ -1,5 +1,6 @@
 :root {
     --time-wrapper-background: rgb(16, 117, 41);
+    --selected-button: rgb(7, 47, 17);
     --light-bg: rgb(121, 236, 142);
 }
 body {
@@ -36,6 +37,8 @@ h2, h3, p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 }
 .heading {
     font-size: 30pt;
@@ -79,6 +82,9 @@ h2, h3, p {
     height: 75px;
     margin: 5px;
 }
+.off {
+    background-color: var(--selected-button);
+}
 .hour-heading {
     background: var(--light-bg);
     padding: 5px;
@@ -102,15 +108,7 @@ h2, h3, p {
     margin: 10px;
 }
 #left-menu-wrapper {
-    /** 
-    ** display none until functional
-
-
-
-    display: none;
-        **/
-        display: flex;
-
+    display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
@@ -230,17 +228,38 @@ h2, h3, p {
 .weekend {
     opacity: .5;
 }
+.hide-element {
+    display: none;
+}
 @media screen and (max-width: 1090px) {
     #main-time-wrapper {
         width: 750px;
     }
 }
-@media screen and (max-width:800px) {
+@media screen and (max-width:860px) {
     #menu-wrapper {
         flex-direction: column;
     }
     #main-time-wrapper {
         width: 400px;
+    }
+}
+@media screen and (max-width: 600px) {
+    #days-off-modal {
+        height: 400px;
+        width: 250px;
+        padding: 15px;
+    }
+    #days-off-button-wrapper {
+        height: 125px;
+    }
+    .days-off-day-button {
+        width: 40px;
+        height: 40px;
+        font-size: 18pt;
+    }
+    .menu-heading {
+        font-size: 1.25em;
     }
 }
 @media screen and (max-width: 450px) {

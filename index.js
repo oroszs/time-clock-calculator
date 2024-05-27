@@ -4,7 +4,7 @@ window.onload = () => {
 
 const initialize = () => {
     let obj = getSettings();
-    applySettings(obj);
+    if(obj) applySettings(obj);
     calculateTime();
     setTriggers();
 }
@@ -12,20 +12,29 @@ const initialize = () => {
 const getSettings = () => {
     let settingsObj = window.localStorage.getItem("settings");
     if(settingsObj == null) {
-        settingsObj = {
-            daysOff: [0,0,1,1,0,0,0]
-        }
+        daysOffModal();
     }
     return settingsObj;
 }
 
+const daysOffModal = () => {
+    window.scrollTo(0,0);
+    document.body.style.overflow = "hidden";
+    let modalWrapper = document.querySelector('.modal-wrapper');
+    modalWrapper.className = 'modal-wrapper';
+}
+
 const applySettings = (obj) => {
+    window.localStorage.setItem("settings", obj);
     let days = document.querySelectorAll('.day-wrapper');
     for (let i = 0; i < days.length; i++) {
         if(obj.daysOff[i] === 1) {
-            days[i].className += " weekend";
+            days[i].className = "day-wrapper weekend";
+        } else {
+            days[i].className = 'day-wrapper';
         }
     }
+    calculateTime();
 }
 
 const calculateTime = () => {
@@ -98,5 +107,29 @@ const setTriggers = () => {
         input.onchange = () => {
             calculateTime();
         }
+    });
+    let daysOffButtons = document.querySelectorAll('.days-off-day-button');
+    daysOffButtons.forEach(but => {
+        but.addEventListener('click', () => {
+            but.classList.toggle('off');
+        });
+    });
+    let confirm = document.querySelector('.confirm-button');
+    confirm.addEventListener('click', () => {
+        let buts = document.querySelectorAll('.days-off-day-button');
+        let settingsObj = {};
+        let daysArr = [];
+        for(let i = 0; i < buts.length; i++) {
+            buts[i].classList.contains('off') ? daysArr.push(1) : daysArr.push(0);
+        }
+        settingsObj.daysOff = daysArr;
+        applySettings(settingsObj);
+        let wrapper = document.querySelector('.modal-wrapper');
+        wrapper.className = 'modal-wrapper hide-element';
+        document.body.style.overflow = 'auto';
+    });
+    let daysOffButton = document.querySelector('#days-off-wrapper');
+    daysOffButton.addEventListener('click', () => {
+        daysOffModal();
     });
 }
