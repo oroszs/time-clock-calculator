@@ -3,18 +3,18 @@ window.onload = () => {
 }
 
 const initialize = () => {
-    let obj = getSettings();
-    if(obj) applySettings(obj);
+    let str = getSettings();
+    if(str) applySettings(str);
     calculateTime();
     setTriggers();
 }
 
 const getSettings = () => {
-    let settingsObj = window.localStorage.getItem("settings");
-    if(settingsObj == null) {
+    let str = localStorage.getItem("daysOffStr");
+    if(!str) {
         daysOffModal();
     }
-    return settingsObj;
+    return str;
 }
 
 const daysOffModal = () => {
@@ -24,15 +24,22 @@ const daysOffModal = () => {
     modalWrapper.className = 'modal-wrapper';
 }
 
-const applySettings = (obj) => {
-    window.localStorage.setItem("settings", obj);
+const saveSettings = (str) => {
+    localStorage.setItem("daysOffStr", str);
+}
+
+const applySettings = (str) => {
     let days = document.querySelectorAll('.day-wrapper');
     for (let i = 0; i < days.length; i++) {
-        if(obj.daysOff[i] === 1) {
+        if(str[i] === 'x') {
             days[i].className = "day-wrapper weekend";
         } else {
             days[i].className = 'day-wrapper';
         }
+    }
+    let buts = document.querySelectorAll('.days-off-day-button');
+    for(let i = 0; i < buts.length; i++) {
+        str[i] === 'x' ? buts[i].className = 'days-off-day-button button off' : buts[i].className = 'days-off-day-button button';
     }
     calculateTime();
 }
@@ -117,13 +124,12 @@ const setTriggers = () => {
     let confirm = document.querySelector('.confirm-button');
     confirm.addEventListener('click', () => {
         let buts = document.querySelectorAll('.days-off-day-button');
-        let settingsObj = {};
-        let daysArr = [];
+        let str = '';
         for(let i = 0; i < buts.length; i++) {
-            buts[i].classList.contains('off') ? daysArr.push(1) : daysArr.push(0);
+            buts[i].classList.contains('off') ? str += 'x' : str += 'o';
         }
-        settingsObj.daysOff = daysArr;
-        applySettings(settingsObj);
+        applySettings(str);
+        saveSettings(str);
         let wrapper = document.querySelector('.modal-wrapper');
         wrapper.className = 'modal-wrapper hide-element';
         document.body.style.overflow = 'auto';
