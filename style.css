@@ -131,8 +131,8 @@ h2, h3, p {
     height: 50px;
 }
 #days-off-wrapper {
-    width: 250px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
 }
 .menu-button {
     background: var(--time-wrapper-background);
