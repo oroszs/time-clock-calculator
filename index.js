@@ -3,48 +3,80 @@ window.onload = () => {
 }
 
 const initialize = () => {
-    let str = getSettings();
-    if(str) applySettings(str);
-    calculateTime();
+    let obj = getSettings();
+    if(obj.daysOff) applySettings('daysOff', obj.daysOff);
+    if(obj.pay) applySettings('pay', obj.pay);
+    calculate();
     setTriggers();
 }
 
 const getSettings = () => {
-    let str = localStorage.getItem("daysOffStr");
-    if(!str) {
-        daysOffModal();
+    let settingsObj = {daysOff : null, pay : null};
+    settingsObj.daysOff = localStorage.getItem("daysOff");
+    settingsObj.pay = parseFloat(localStorage.getItem('pay'));
+    if(!settingsObj.daysOff) {
+        showModal('daysOff');
     }
-    return str;
+    return settingsObj;
 }
 
-const daysOffModal = () => {
+const saveSettings = (dataString, data) => {
+    localStorage.setItem(dataString, data);
+}
+
+const applySettings = (dataString, data) => {
+    if(dataString == 'daysOff'){
+        let days = document.querySelectorAll('.day-wrapper');
+        let str = data;
+        for (let i = 0; i < days.length; i++) {
+            if(str[i] === 'x') {
+                days[i].className = "day-wrapper weekend";
+            } else {
+                days[i].className = 'day-wrapper';
+            }
+        }
+        let buts = document.querySelectorAll('.days-off-day-button');
+        for(let i = 0; i < buts.length; i++) {
+            str[i] === 'x' ? buts[i].className = 'days-off-day-button button off' : buts[i].className = 'days-off-day-button button';
+        }
+    }
+    if(dataString == 'pay') {
+        let payHolder = document.querySelector('#pay-data');
+        payHolder.value = data;
+    }
+}
+
+const showModal = (modalString) => {
     window.scrollTo(0,0);
     document.body.style.overflow = "hidden";
     let modalWrapper = document.querySelector('.modal-wrapper');
     modalWrapper.className = 'modal-wrapper';
-}
-
-const saveSettings = (str) => {
-    localStorage.setItem("daysOffStr", str);
-}
-
-const applySettings = (str) => {
-    let days = document.querySelectorAll('.day-wrapper');
-    for (let i = 0; i < days.length; i++) {
-        if(str[i] === 'x') {
-            days[i].className = "day-wrapper weekend";
-        } else {
-            days[i].className = 'day-wrapper';
-        }
+    if(modalString == 'daysOff') {
+        let daysOffModal = document.querySelector('#days-off-modal');
+        daysOffModal.className = 'modal';
+    } else {
+        let payModal = document.querySelector('#pay-modal');
+        let payHolder = document.querySelector('#pay-data');
+        let payInput = document.querySelector('#pay-input');
+        payInput.value = payHolder.value;
+        payModal.className = 'modal';
     }
-    let buts = document.querySelectorAll('.days-off-day-button');
-    for(let i = 0; i < buts.length; i++) {
-        str[i] === 'x' ? buts[i].className = 'days-off-day-button button off' : buts[i].className = 'days-off-day-button button';
-    }
-    calculateTime();
 }
 
-const calculateTime = () => {
+const incrementTime = (timeEl, incString) => {
+    let [hours, minutes] = timeEl.value.split(':').map(Number);
+    let tempDate = new Date();
+    tempDate.setHours(hours, minutes, 0, 0);
+    incString == 'plus' ? tempDate.setMinutes(tempDate.getMinutes() + 1) : tempDate.setMinutes(tempDate.getMinutes() - 1);
+    const newTimeString = tempDate.toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit' 
+    });
+    timeEl.value = newTimeString;
+}
+
+const calculate = () => {
     let days = document.querySelectorAll('.day-wrapper');
     days.forEach(day => {
         if(!day.classList.contains('weekend')) {
@@ -101,6 +133,18 @@ const calculateTime = () => {
     let otHoursEl = document.querySelector('#overtime-hours');
     weeklyHourEl.textContent = `Standard Hours: ${roundedWeekly}`;
     otHours > 0 ? otHoursEl.textContent = `Overtime Hours: ${roundedOt}` : otHoursEl.textContent = `Overtime Hours: 0`;
+    let payHolder = document.querySelector('#pay-data');
+    if(payHolder.value) {
+        let estimateHolder = document.querySelector('#estimated-pay');
+        let hourly = payHolder.value;
+        let hourlyOT = hourly * 1.5;
+        estimateHolder.className = 'menu-heading';
+        let standardTotal, overTimeTotal;
+        standardTotal = hourly * roundedWeekly;
+        overTimeTotal = hourlyOT * roundedOt;
+        let estimate = ((standardTotal + overTimeTotal) * .8).toFixed(2);
+        estimateHolder.textContent = `Estimated Pay: $${estimate}`;
+    }
 }
 
 const setTriggers = () => {
@@ -112,8 +156,24 @@ const setTriggers = () => {
     wfhInputs.forEach(wfhI => inputs.push(wfhI));
     inputs.forEach(input => {
         input.onchange = () => {
-            calculateTime();
+            calculate();
         }
+    });
+    let minusButtons = document.querySelectorAll('.minus-time');
+    let plusButtons = document.querySelectorAll('.plus-time');
+    minusButtons.forEach(but => {
+        but.addEventListener('click', () => {
+            let timeWrap = but.closest('.time-div');
+            incrementTime(timeWrap.querySelector('input[type="time"]'), 'minus');
+            calculate();
+        });
+    });
+    plusButtons.forEach(but => {
+        but.addEventListener('click', () => {
+            let timeWrap = but.closest('.time-div');
+            incrementTime(timeWrap.querySelector('input[type="time"]'), 'plus');
+            calculate();
+        });
     });
     let daysOffButtons = document.querySelectorAll('.days-off-day-button');
     daysOffButtons.forEach(but => {
@@ -121,21 +181,47 @@ const setTriggers = () => {
             but.classList.toggle('off');
         });
     });
-    let confirm = document.querySelector('.confirm-button');
-    confirm.addEventListener('click', () => {
+    let daysOffConfirm = document.querySelector('#days-off-confirm');
+    daysOffConfirm.addEventListener('click', () => {
         let buts = document.querySelectorAll('.days-off-day-button');
         let str = '';
         for(let i = 0; i < buts.length; i++) {
             buts[i].classList.contains('off') ? str += 'x' : str += 'o';
         }
-        applySettings(str);
-        saveSettings(str);
-        let wrapper = document.querySelector('.modal-wrapper');
-        wrapper.className = 'modal-wrapper hide-element';
-        document.body.style.overflow = 'auto';
+        applySettings('daysOff', str);
+        saveSettings('daysOff', str);
+        calculate();
+        hideModal('daysOff');
+    });
+    let payConfirm = document.querySelector('#pay-confirm');
+    payConfirm.addEventListener('click', () => {
+        let payNum = parseFloat(document.querySelector('#pay-input').value);
+        if(payNum > 0 && typeof payNum == 'number') {
+            applySettings('pay', payNum);
+            saveSettings('pay', payNum);
+            calculate();
+            hideModal('pay');
+        }
+        else{console.log(typeof payNum, payNum);}
     });
     let daysOffButton = document.querySelector('#days-off-wrapper');
     daysOffButton.addEventListener('click', () => {
-        daysOffModal();
+        showModal('daysOff');
     });
+    let payButton = document.querySelector('#pay-wrapper');
+    payButton.addEventListener('click', () => {
+        showModal('pay');
+    });
+    const hideModal = (modalString) => {
+        let wrapper = document.querySelector('.modal-wrapper');
+        wrapper.className = 'modal-wrapper hide-element';
+        document.body.style.overflow = 'auto';
+        if(modalString == 'daysOff') {
+            let daysOffModal = document.querySelector('#days-off-modal');
+            daysOffModal.className = 'modal hide-element';
+        } else {
+            let payModal = document.querySelector('#pay-modal');
+            payModal.className = 'modal hide-element';
+        }
+    }
 }

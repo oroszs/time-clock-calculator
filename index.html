@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class='modal-wrapper hide-element'>
-            <div id='days-off-modal'>
+            <div class='modal hide-element' id='days-off-modal'>
                 <h1 class='heading'>Days Off</h1>
                 <div id='days-off-button-wrapper'>
                     <div class='days-off-day-button button'>S</div>
@@ -19,7 +19,12 @@
                     <div class='days-off-day-button button'>F</div>
                     <div class='days-off-day-button button'>S</div>
                 </div>
-                <div class='button confirm-button menu-button'>Confirm</div>
+                <div id='days-off-confirm' class='button confirm-button menu-element'>Confirm</div>
+            </div>
+            <div class='modal hide-element' id='pay-modal'>
+                <h1 class='heading'>Hourly Pay</h1>
+                <input type='number' step='0.01' id='pay-input' class='number-input pay-input' placeholder='Hourly Pay' />
+                <div id='pay-confirm' class='button confirm-button menu-element'>Confirm</div>
             </div>
         </div>
         <div id='wrapper'>
@@ -30,10 +35,18 @@
                         <div class='time-div'>
                             <p>Shift Start</p>
                             <input type='time' value='09:00' class='shift-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Shift End</p>
-                            <input type='time' value='18:00' class='shift-end' />
+                            <input type='time' value='17:00' class='shift-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                     </div>
                     <h3 class='hours'>Hours: </h3>
@@ -44,18 +57,34 @@
                         <div class='time-div'>
                             <p>Shift Start</p>
                             <input type='time' value='09:00' class='shift-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal Start</p>
                             <input type='time' value='12:15' class='meal-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal End</p>
                             <input type='time' value='13:00' class='meal-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Shift End</p>
                             <input type='time' value='18:00' class='shift-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                     </div>
                     <h3 class='hours'>Hours: </h3>
@@ -66,18 +95,34 @@
                         <div class='time-div'>
                             <p>Shift Start</p>
                             <input type='time' value='09:00' class='shift-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal Start</p>
                             <input type='time' value='12:15' class='meal-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal End</p>
                             <input type='time' value='13:00' class='meal-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Shift End</p>
                             <input type='time' value='18:00' class='shift-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                     </div>
                     <h3 class='hours'>Hours: </h3>
@@ -88,18 +133,34 @@
                         <div class='time-div'>
                             <p>Shift Start</p>
                             <input type='time' value='09:00' class='shift-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal Start</p>
                             <input type='time' value='12:15' class='meal-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal End</p>
                             <input type='time' value='13:00' class='meal-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Shift End</p>
                             <input type='time' value='18:00' class='shift-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                     </div>
                     <h3 class='hours'>Hours: </h3>
@@ -110,18 +171,34 @@
                         <div class='time-div'>
                             <p>Shift Start</p>
                             <input type='time' value='09:00' class='shift-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal Start</p>
                             <input type='time' value='12:15' class='meal-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal End</p>
                             <input type='time' value='13:00' class='meal-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Shift End</p>
                             <input type='time' value='18:00' class='shift-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                     </div>
                     <h3 class='hours'>Hours: </h3>
@@ -132,18 +209,34 @@
                         <div class='time-div'>
                             <p>Shift Start</p>
                             <input type='time' value='09:00' class='shift-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal Start</p>
                             <input type='time' value='12:15' class='meal-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal End</p>
                             <input type='time' value='13:00' class='meal-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Shift End</p>
                             <input type='time' value='18:00' class='shift-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                     </div>
                     <h3 class='hours'>Hours: </h3>
@@ -154,18 +247,34 @@
                         <div class='time-div'>
                             <p>Shift Start</p>
                             <input type='time' value='09:00' class='shift-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal Start</p>
                             <input type='time' value='12:15' class='meal-start' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Meal End</p>
                             <input type='time' value='13:00' class='meal-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                         <div class='time-div'>
                             <p>Shift End</p>
                             <input type='time' value='18:00' class='shift-end' />
+                            <div class='adjust-time-wrapper'>
+                                <button class='adjust-time-button minus-time'><span class='adjust-time-text-minus'>-</span></button>
+                                <button class='adjust-time-button plus-time'><span class='adjust-time-text-plus'>+</span></button>
+                            </div>
                         </div>
                     </div>
                     <h3 class='hours'>Hours: </h3>
@@ -173,25 +282,29 @@
             </div>
             <div id='menu-wrapper'>
                 <div id='left-menu-wrapper'>
-                    <div class='menu-button button hide-element' id='default-wrapper'>
-                        <h2 class='menu-heading'>Edit Default</h2>
+                    <div class='menu-button menu-element button' id='pay-wrapper'>
+                        <h2 class='menu-heading'>Edit Pay</h2>
                     </div>
-                    <div class='menu-button button' id='days-off-wrapper'>
+                    <div class='menu-button menu-element button' id='days-off-wrapper'>
                         <h2 class='menu-heading'>Edit Days Off</h2>
                     </div>
                 </div>
-                <div id='weekly-time-wrapper' class='menu-button'>
+                <div id='weekly-time-wrapper' class='menu-element'>
                     <h2 class='menu-heading' id='weekly-hours'>Weekly</h2>
                     <h2 class='menu-heading' id='overtime-hours'>Overtime</h2>
+                    <h2 class='menu-heading hide-element' id='estimated-pay'>Estimated Pay: $$$$</h2>
                 </div>
-                <div class='menu-button' id='from-home-wrapper'>
+                <div class='menu-element' id='from-home-wrapper'>
                     <h2 class='menu-heading'>Work From Home</h2>
                     <h3 class='menu-heading'>
-                        <input id='wfhHours' class='wfh-input' type='number' min='0' max='99' minlength="1" maxlength="2" value="0" /> Hours
-                        <input id='wfhMinutes' class='wfh-input' type='number' min='0' max='59' minlength="1" maxlength='2' value="0" /> Minutes
+                        <input id='wfhHours' class='number-input wfh-input' type='number' min='0' max='99' minlength="1" maxlength="2" value="0" /> Hours
+                        <input id='wfhMinutes' class='number-input wfh-input' type='number' min='0' max='59' minlength="1" maxlength='2' value="0" /> Minutes
                     </h3>
                 </div>
             </div>
+        </div>
+        <div class='hide-element'>
+            <input id='pay-data' type='number' />
         </div>
         <script src='./index.js' type='text/javascript'></script>
     </body>
