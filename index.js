@@ -202,7 +202,9 @@ const setTriggers = () => {
             calculate();
             hideModal('pay');
         }
-        else{console.log(typeof payNum, payNum);}
+        else{
+            hideModal('pay');
+        }
     });
     let daysOffButton = document.querySelector('#days-off-wrapper');
     daysOffButton.addEventListener('click', () => {
