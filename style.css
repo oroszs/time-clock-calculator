@@ -44,6 +44,7 @@ h2, h3, p {
     width: 100%;
 }
 .heading {
+    text-align: center;
     font-size: 30pt;
 }
 .modal {
@@ -295,7 +296,7 @@ h2, h3, p {
     }
 }
 @media screen and (max-width: 600px) {
-    #days-off-modal {
+    .modal {
         height: 400px;
         width: 250px;
         padding: 15px;
