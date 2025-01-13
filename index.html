@@ -19,12 +19,15 @@
                     <div class='days-off-day-button button'>F</div>
                     <div class='days-off-day-button button'>S</div>
                 </div>
-                <div id='days-off-confirm' class='button confirm-button menu-element'>Confirm</div>
+                <div id='days-off-confirm' class='button modal-button menu-element'>Confirm</div>
             </div>
             <div class='modal hide-element' id='pay-modal'>
-                <h1 class='heading'>Hourly Pay</h1>
+                <h1 class='heading'>Pay</h1>
                 <input type='number' step='0.01' id='pay-input' class='number-input pay-input' placeholder='Hourly Pay' />
-                <div id='pay-confirm' class='button confirm-button menu-element'>Confirm</div>
+                <div class='modal-button-wrapper'>
+                    <div id='pay-confirm' class='button modal-button menu-element'>Confirm</div>
+                    <div id='pay-remove' class='button modal-button menu-element'>Remove</div>
+                </div>
             </div>
         </div>
         <div id='wrapper'>

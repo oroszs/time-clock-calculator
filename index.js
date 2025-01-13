@@ -58,7 +58,13 @@ const showModal = (modalString) => {
         let payModal = document.querySelector('#pay-modal');
         let payHolder = document.querySelector('#pay-data');
         let payInput = document.querySelector('#pay-input');
-        payInput.value = payHolder.value;
+        let payRemove = document.querySelector('#pay-remove');
+        if(payHolder.value) {
+            payInput.value = payHolder.value;
+            payRemove.className = 'button modal-button menu-element';
+        } else {
+            payRemove.className = 'button modal-button menu-element hide-element';
+        }
         payModal.className = 'modal';
     }
 }
@@ -134,8 +140,8 @@ const calculate = () => {
     weeklyHourEl.textContent = `Standard Hours: ${roundedWeekly}`;
     otHours > 0 ? otHoursEl.textContent = `Overtime Hours: ${roundedOt}` : otHoursEl.textContent = `Overtime Hours: 0`;
     let payHolder = document.querySelector('#pay-data');
+    let estimateHolder = document.querySelector('#estimated-pay');
     if(payHolder.value) {
-        let estimateHolder = document.querySelector('#estimated-pay');
         let hourly = payHolder.value;
         let hourlyOT = hourly * 1.5;
         estimateHolder.className = 'menu-heading';
@@ -144,6 +150,9 @@ const calculate = () => {
         overTimeTotal = hourlyOT * roundedOt;
         let estimate = ((standardTotal + overTimeTotal) * .8).toFixed(2);
         estimateHolder.textContent = `Estimated Pay: $${estimate}`;
+    } else {
+        estimateHolder.textContent = '';
+        estimateHolder.className = 'menu-heading hide-element';
     }
 }
 
@@ -206,6 +215,13 @@ const setTriggers = () => {
             hideModal('pay');
         }
     });
+    let payRemove = document.querySelector('#pay-remove');
+    payRemove.addEventListener('click', () => {
+        applySettings('pay', null);
+        saveSettings('pay', null);
+        calculate();
+        hideModal('pay');
+    });
     let daysOffButton = document.querySelector('#days-off-wrapper');
     daysOffButton.addEventListener('click', () => {
         showModal('daysOff');
@@ -214,6 +230,7 @@ const setTriggers = () => {
     payButton.addEventListener('click', () => {
         showModal('pay');
     });
+
     const hideModal = (modalString) => {
         let wrapper = document.querySelector('.modal-wrapper');
         wrapper.className = 'modal-wrapper hide-element';

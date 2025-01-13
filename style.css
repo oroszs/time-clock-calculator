@@ -139,6 +139,7 @@ h2, h3, p {
     justify-content: space-evenly;
     align-items: center;
     margin-top: 3px;
+    touch-action: manipulation;
 }
 .adjust-time-button {
     cursor: pointer;
@@ -174,11 +175,21 @@ h2, h3, p {
     align-items: center;
     box-shadow: var(--main-element-shadow);
 }
-.confirm-button {
-    width: 125px;
-    height: 70px;
+.modal-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    gap: 10px;
+    align-items: center;
+}
+.modal-button {
+    padding: 10px;
+    max-width: 75px;
     color: white;
-    font-size: 20pt;
+    font-size: 14pt;
+    flex: none;
+    text-align: center;
 }
 .number-input {
     padding: 5px;
@@ -192,7 +203,7 @@ h2, h3, p {
     width: 30px;
 }
 .pay-input {
-    width: 75px;
+    width: 125px;
 }
 #weekly-time-wrapper {
     display: flex;
