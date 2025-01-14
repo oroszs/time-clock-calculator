@@ -140,19 +140,25 @@ const calculate = () => {
     weeklyHourEl.textContent = `Standard Hours: ${roundedWeekly}`;
     otHours > 0 ? otHoursEl.textContent = `Overtime Hours: ${roundedOt}` : otHoursEl.textContent = `Overtime Hours: 0`;
     let payHolder = document.querySelector('#pay-data');
+    let weeklyPayHolder = document.querySelector('#weekly-pay-wrapper');
+    let totalPayHolder = document.querySelector('#total-pay');
     let estimateHolder = document.querySelector('#estimated-pay');
     if(payHolder.value) {
         let hourly = payHolder.value;
         let hourlyOT = hourly * 1.5;
-        estimateHolder.className = 'menu-heading';
+        weeklyPayHolder.className = 'menu-element';
         let standardTotal, overTimeTotal;
         standardTotal = hourly * roundedWeekly;
         overTimeTotal = hourlyOT * roundedOt;
-        let estimate = ((standardTotal + overTimeTotal) * .8).toFixed(2);
-        estimateHolder.textContent = `Estimated Pay: $${estimate}`;
+        let totalPay = (standardTotal + overTimeTotal).toFixed(2);
+        let lowEstimate = (totalPay * .74).toFixed(2);
+        let highEstimate = (totalPay * .76).toFixed(2);
+        totalPayHolder.textContent = `Total Gross: $${totalPay}`;
+        estimateHolder.textContent = `Estimated Net: ~$${lowEstimate} - $${highEstimate}`;
     } else {
+        weeklyPayHolder.className = 'menu-element hide-element';
+        totalPayHolder.textContent = '';
         estimateHolder.textContent = '';
-        estimateHolder.className = 'menu-heading hide-element';
     }
 }
 
@@ -184,6 +190,12 @@ const setTriggers = () => {
             calculate();
         });
     });
+    let settingsButton = document.querySelector('#settings-button');
+    settingsButton.addEventListener('click', () => {
+        let mainWrap = document.querySelector('#main-menu-wrapper');
+        console.log(settingsButton, mainWrap);
+        mainWrap.classList.toggle('hide-element');
+    });
     let daysOffButtons = document.querySelectorAll('.days-off-day-button');
     daysOffButtons.forEach(but => {
         but.addEventListener('click', () => {
@@ -212,6 +224,9 @@ const setTriggers = () => {
             hideModal('pay');
         }
         else{
+            applySettings('pay', null);
+            saveSettings('pay', null);
+            calculate();
             hideModal('pay');
         }
     });
