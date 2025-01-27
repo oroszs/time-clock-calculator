@@ -94,6 +94,9 @@ input[type="time"]{
     border: none;
     width: fit-content;
 }
+input[type='file']{
+    flex:none;
+}
 h2, h3, p {
     margin: 0;
 }
