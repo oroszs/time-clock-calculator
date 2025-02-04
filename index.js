@@ -166,12 +166,17 @@ const setTriggers = () => {
     let timeInputs = document.querySelectorAll('input[type="time"]');
     let wfhEl = document.querySelector('#from-home-wrapper');
     let wfhInputs = wfhEl.querySelectorAll('input[type="number"]');
-    let inputs = [];
-    timeInputs.forEach(tI => inputs.push(tI));
-    wfhInputs.forEach(wfhI => inputs.push(wfhI));
-    inputs.forEach(input => {
-        input.onchange = () => {
+    timeInputs.forEach(tI => {
+        tI.onchange = () => {
             calculate();
+        }
+    });
+    wfhInputs.forEach(wfhI => {
+        wfhI.onchange = () => {
+            if(wfhI.value < 0 || !wfhI.value) {
+                wfhI.value = 0;
+            }
+        calculate();
         }
     });
     let minusButtons = document.querySelectorAll('.minus-time');
