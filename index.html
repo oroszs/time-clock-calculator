@@ -8,12 +8,10 @@
     </head>
     <body>
         <div class='modal-wrapper hide-element'>
-            <div class='modal'>
+            <div class='modal hide-element' id='photo-upload-modal'>
                 <h3 class='heading'>Take A Picture!</h3>
                 <input type='file' accept='image/*' capture='environment' />
             </div>
-        </div>
-        <div class='modal-wrapper hide-element'>
             <div class='modal hide-element' id='days-off-modal'>
                 <h1 class='heading'>Days Off</h1>
                 <div id='days-off-button-wrapper'>
@@ -56,6 +54,9 @@
                     </div>
                     <div class='menu-element button' id='days-off-wrapper'>
                         <h2 class='menu-heading'>Edit Days Off</h2>
+                    </div>
+                    <div class='menu-element button' id='photo-upload-wrapper'>
+                        <h2 class='menu-heading'>Upload Time Card</h2>
                     </div>
                 </div>
                 <div class='menu-wrapper'>

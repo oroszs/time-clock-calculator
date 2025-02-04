@@ -245,6 +245,10 @@ const setTriggers = () => {
     payButton.addEventListener('click', () => {
         showModal('pay');
     });
+    let photoButton = document.querySelector('#photo-upload-wrapper');
+    photoButton.addEventListener('click', () => {
+        showModal('photo');
+    });
 
     const hideModal = (modalString) => {
         let wrapper = document.querySelector('.modal-wrapper');
