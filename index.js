@@ -5,7 +5,11 @@ window.onload = () => {
 const initialize = () => {
     let obj = getSettings();
     if(obj.daysOff) applySettings('daysOff', obj.daysOff);
-    if(obj.pay) applySettings('pay', obj.pay);
+    if(obj.pay) {
+        applySettings('pay', obj.pay);
+    } else {
+        applySettings('pay', null);
+    }
     calculate();
     setTriggers();
 }
@@ -43,6 +47,15 @@ const applySettings = (dataString, data) => {
     if(dataString == 'pay') {
         let payHolder = document.querySelector('#pay-data');
         payHolder.value = data;
+        let showPayButton = document.querySelector('#show-pay-wrapper');
+        let payWrapper = document.querySelector('#weekly-pay-wrapper');
+        if(!data) {
+            if(!showPayButton.classList.contains('hide-element')) showPayButton.classList.add('hide-element');
+            if(!payWrapper.classList.contains('hide-element')) payWrapper.classList.add('hide-element');
+        } else {
+            if(showPayButton.classList.contains('hide-element')) showPayButton.classList.remove('hide-element');
+            if(payWrapper.classList.contains('hide-element')) payWrapper.classList.remove('hide-element');
+        }
     }
 }
 
@@ -146,7 +159,6 @@ const calculate = () => {
     if(payHolder.value) {
         let hourly = payHolder.value;
         let hourlyOT = hourly * 1.5;
-        weeklyPayHolder.className = 'menu-element';
         let standardTotal, overTimeTotal;
         standardTotal = hourly * roundedWeekly;
         overTimeTotal = hourlyOT * roundedOt;
@@ -156,7 +168,6 @@ const calculate = () => {
         totalPayHolder.textContent = `Total Gross: $${totalPay}`;
         estimateHolder.textContent = `Estimated Net: ~$${lowEstimate} - $${highEstimate}`;
     } else {
-        weeklyPayHolder.className = 'menu-element hide-element';
         totalPayHolder.textContent = '';
         estimateHolder.textContent = '';
     }
@@ -198,8 +209,14 @@ const setTriggers = () => {
     let settingsButton = document.querySelector('#settings-button');
     settingsButton.addEventListener('click', () => {
         let mainWrap = document.querySelector('#main-menu-wrapper');
-        console.log(settingsButton, mainWrap);
-        mainWrap.classList.toggle('hide-element');
+        if(!mainWrap.classList.contains('expanded')){
+            mainWrap.classList.add('expanded');
+            mainWrap.classList.remove('shrunk', 'shrink-anim');
+            mainWrap.onanimationend = (e) => {if(e.animationName == 'grown') mainWrap.classList.add('grow-anim')};
+        } else {
+            mainWrap.classList.remove('expanded', 'grow-anim');
+            mainWrap.classList.add('shrunk', 'shrink-anim');
+        }
     });
     let daysOffButtons = document.querySelectorAll('.days-off-day-button');
     daysOffButtons.forEach(but => {
@@ -241,6 +258,21 @@ const setTriggers = () => {
         saveSettings('pay', null);
         calculate();
         hideModal('pay');
+    });
+    let showHoursButton = document.querySelector('#show-hours-wrapper');
+    showHoursButton.addEventListener('click', () => {
+        let hoursEl = document.querySelector('#weekly-time-wrapper');
+        hoursEl.classList.toggle('hide-element');
+    });
+    let showWfhButton = document.querySelector('#show-wfh-wrapper');
+    showWfhButton.addEventListener('click', () => {
+        let wfhEl = document.querySelector('#from-home-wrapper');
+        wfhEl.classList.toggle('hide-element');
+    });
+    let showPayButton = document.querySelector('#show-pay-wrapper');
+    showPayButton.addEventListener('click', () => {
+        let payEl = document.querySelector('#weekly-pay-wrapper');
+        payEl.classList.toggle('hide-element');
     });
     let daysOffButton = document.querySelector('#days-off-wrapper');
     daysOffButton.addEventListener('click', () => {
