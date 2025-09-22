@@ -18,9 +18,6 @@ const getSettings = () => {
     let settingsObj = {daysOff : null, pay : null};
     settingsObj.daysOff = localStorage.getItem("daysOff");
     settingsObj.pay = parseFloat(localStorage.getItem('pay'));
-    if(!settingsObj.daysOff) {
-        showModal('daysOff');
-    }
     return settingsObj;
 }
 

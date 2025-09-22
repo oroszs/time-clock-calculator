@@ -343,5 +343,25 @@
             <input id='pay-data' type='number' />
         </div>
         <script src='./index.js' type='text/javascript'></script>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.open();
+      } else {
+        console.log("Logged in as:", user.email);
+      }
+    });
+
+    window.netlifyIdentity.on("login", user => {
+      console.log("User logged in:", user.email);
+      user.jwt().then(token => {
+        console.log("JWT token:", token); // use this to call protected functions
+      });
+    });
+  }
+</script>
+
     </body>
 </html>
