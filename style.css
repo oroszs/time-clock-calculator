@@ -80,6 +80,9 @@ h1 span:nth-child(3) {
     }
 }
 
+.login-text {
+    font-family: 'Arial', sans-serif;
+}
 
 .main-head {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
