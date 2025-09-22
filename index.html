@@ -360,11 +360,11 @@
             }
             window.netlifyIdentity.on("init", user => {
                 if (user) {
+                    console.log('User logged in');
                     let loginText = document.querySelector('.login-text');
                     if(loginText){
-                        loginText.textContent = `Welcome ${user.user_metadata.full_name.split(' ')[0]}`;
+                        loginText.textContent = `Welcome ${user.user_metadata.full_name}`;
                     }
-                    window.netlifyIdentity.open();
                 }
                 let loginButton = document.querySelector('#show-login');
                 loginButton.addEventListener('click', ()=> {
