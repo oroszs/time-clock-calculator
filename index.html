@@ -64,6 +64,9 @@
                     <div class='menu-element button menu-button' id='show-wfh-wrapper'>
                         <h2 class='menu-heading'>Show / Hide WFH</h2>
                     </div>
+                    <div class='menu-element button menu-button' id='show-login'>
+                        <h2 class='menu-heading'>Log In</h2>
+                    </div>
                     <div class='menu-element button menu-button hide-element'>
                         <h2 class='menu-heading'>Show / Hide PTO</h2>
                     </div>
@@ -363,6 +366,10 @@
                     }
                     window.netlifyIdentity.open();
                 }
+                let loginButton = document.querySelector('#show-login');
+                loginButton.addEventListener('click', ()=> {
+                    window.netlifyIdentity.open();
+                });
             });
 
             window.netlifyIdentity.on("login", user => {
