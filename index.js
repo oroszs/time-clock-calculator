@@ -310,17 +310,29 @@ const setTriggers = () => {
         const file = document.getElementById("upload-button").files[0];
         if (!file) return alert("Pick a file first!");
       
-        // ✅ wrap await in async function
+        // Convert file to base64
         const imageBase64 = await toBase64(file);
       
+        // ✅ Get current logged-in user
+        const user = window.netlifyIdentity.currentUser();
+        if (!user) return alert("You must be logged in!");
+      
+        // ✅ Get JWT from user
+        const token = await user.jwt();
+      
+        // ✅ Send it with Authorization header
         const res = await fetch("/.netlify/functions/vision", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
           body: JSON.stringify({ imageBase64 }),
         });
       
         const data = await res.json();
         console.log(data);
       });
+      
       
 }
