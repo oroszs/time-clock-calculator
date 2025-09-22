@@ -7,10 +7,11 @@
         <link rel='stylesheet' href='./style.css' type='text/css' />
     </head>
     <body>
-        <div class='modal-wrapper hide-element'>
-            <div class='modal hide-element' id='photo-upload-modal'>
+        <div class='modal-wrapper'>
+            <div class='modal' id='photo-upload-modal'>
                 <h3 class='heading'>Take A Picture!</h3>
-                <input type='file' accept='image/*' capture='environment' />
+                <input type='file' id='upload-button' placeholder='Choose Image' />
+                <div class='button modal-button menu-element' id='analyze-button'>Analyze</div>
             </div>
             <div class='modal hide-element' id='days-off-modal'>
                 <h1 class='heading'>Days Off</h1>
@@ -52,7 +53,7 @@
                     <div class='menu-element button menu-button' id='days-off-wrapper'>
                         <h2 class='menu-heading'>Edit Days Off</h2>
                     </div>
-                    <div class='menu-element button menu-button hide-element' id='photo-upload-wrapper'>
+                    <div class='menu-element button menu-button' id='photo-upload-wrapper'>
                         <h2 class='menu-heading'>Upload Time Card</h2>
                     </div>
                     <div class='menu-element button menu-button' id='show-pay-wrapper'>
