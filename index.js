@@ -313,12 +313,12 @@ const setTriggers = () => {
         const file = document.getElementById("upload-button").files[0];
         if (!file) return alert("Pick a file first!");
       
-        // Convert file to base64
-        const imageBase64 = await toBase64(file);
-      
         // ✅ Get current logged-in user
         const user = window.netlifyIdentity.currentUser();
         if (!user) return alert("You must be logged in!");
+
+        // Convert file to base64
+        const imageBase64 = await toBase64(file);
       
         // ✅ Get JWT from user
         const token = await user.jwt();
