@@ -64,6 +64,9 @@ const showModal = (modalString) => {
     if(modalString == 'daysOff') {
         let daysOffModal = document.querySelector('#days-off-modal');
         daysOffModal.className = 'modal';
+    } else if (modalString == 'photo') {
+        let photoModal = document.querySelector('#photo-upload-modal');
+        photoModal.className = 'modal';
     } else {
         let payModal = document.querySelector('#pay-modal');
         let payHolder = document.querySelector('#pay-data');

@@ -11,6 +11,8 @@
             <div class='modal hide-element' id='photo-upload-modal'>
                 <h3 class='heading'>Take A Picture!</h3>
                 <input type='file' id='upload-button' placeholder='Choose Image' />
+                <input type="file" accept="image/*" capture="camera" />
+
                 <div class='button modal-button menu-element' id='analyze-button'>Analyze</div>
             </div>
             <div class='modal hide-element' id='days-off-modal'>
@@ -27,7 +29,7 @@
                 <div id='days-off-confirm' class='button modal-button menu-element'>Confirm</div>
             </div>
             <div class='modal hide-element' id='pay-modal'>
-                <h1 class='heading'>Pay</h1>
+                <h1 class='heading'>Hourly Pay</h1>
                 <input type='number' step='0.01' id='pay-input' class='number-input pay-input' placeholder='Hourly Pay' />
                 <div class='modal-button-wrapper'>
                     <div id='pay-confirm' class='button modal-button menu-element'>Confirm</div>

@@ -1,7 +1,8 @@
 :root {
-    --time-wrapper-background: rgb(2, 71, 19);
-    --selected-button: rgb(7, 47, 17);
-    --light-bg: rgb(121, 236, 142);
+    --time-wrapper-background: rgb(22, 82, 37);
+    --selected-button: rgb(1, 18, 5);
+    --light-bg: rgb(79, 221, 95);
+    --modal-bg: #c4f3c7;
     --main-element-shadow: 7px 7px 10px rgba(10, 110, 37, 0.319);
     --main-bg: rgb(212, 255, 215);
 }
@@ -23,11 +24,9 @@ body {
 h1 {
     font-size: 4rem; /* Large text */
     font-weight: bold;
-    text-transform: uppercase;
     color: #000000; /* Dark gray when not illuminated */
     text-align: center;
-    letter-spacing: 2px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Verdana', sans-serif;
     position: relative;
     margin: 0;
 }
@@ -136,7 +135,7 @@ h2, h3, p {
     box-sizing: border-box;
     width: 500px;
     height: 500px;
-    background-color: var(--light-bg);
+    background-color: #9ae485;
     border-radius: 20px;
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.542);
     display: flex;
@@ -190,8 +189,10 @@ h2, h3, p {
     align-items: center;
     flex:none;
     flex-wrap: wrap;
-    background: var(--time-wrapper-background);
-    border-radius: 10px;
+    background-color: white;
+    border-radius: 20px;
+    outline: var(--time-wrapper-background) 2px solid;
+    outline-offset: -10px;
     box-shadow: var(--main-element-shadow);
     padding: 20px;
     gap: 20px;
@@ -213,7 +214,7 @@ h2, h3, p {
     flex: 1;
 }
 #edit-wrapper {
-    height: 200px;
+    height: auto;
     width: 460px;
     flex-wrap: wrap;
     flex-direction: row;
@@ -316,7 +317,6 @@ h2, h3, p {
     color: black;
     width: 15px;
     height: 15px;
-    font-size: 14pt;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -326,13 +326,15 @@ h2, h3, p {
     padding: 10px;
 }
 .adjust-time-text-minus {
-    margin-bottom: 2px;
+    margin-bottom: 3px;
+    font-size: 20pt;
 }
 .adjust-time-text-plus {
     margin-right: 1px;
+    font-size: 14pt;
 }
 .menu-element {
-    background: var(--time-wrapper-background);
+    background: var(--light-bg);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -341,6 +343,7 @@ h2, h3, p {
     box-shadow: var(--main-element-shadow);
     padding: 10px;
     gap: 20px;
+    font-weight: 200;
 }
 .modal-button-wrapper {
     display: flex;
@@ -351,6 +354,7 @@ h2, h3, p {
     align-items: center;
 }
 .modal-button {
+    background-color: var(--time-wrapper-background) !important;
     padding: 10px;
     max-width: 75px;
     color: white;
@@ -373,8 +377,10 @@ h2, h3, p {
     width: 125px;
 }
 .menu-heading {
-    color: white;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    font-family: Verdana;
+    font-weight: normal;
+    font-style: italic;
     font-size: 15pt;
 }
 .day-wrapper {
@@ -413,6 +419,7 @@ h2, h3, p {
 }
 .weekend {
     opacity: .5;
+    pointer-events: none;
 }
 .hide-element {
     display: none;
@@ -429,7 +436,7 @@ h2, h3, p {
         gap: 15px;
     }
     #edit-wrapper {
-        height: 200px;
+        height: auto;
         width: 230px;
         flex-direction: row;
     }
