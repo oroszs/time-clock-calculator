@@ -360,6 +360,7 @@ const setTriggers = () => {
         analyzeButton.querySelector('.spinner').remove();
         analyzeButton.textContent = 'Analyze';
         console.log(data);
+        alert(`data[0].description`);
       });
       
       
