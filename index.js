@@ -82,6 +82,22 @@ const showModal = (modalString) => {
     }
 }
 
+const hideModal = (modalString) => {
+    let wrapper = document.querySelector('.modal-wrapper');
+    wrapper.className = 'modal-wrapper hide-element';
+    document.body.style.overflow = 'auto';
+    if(modalString == 'daysOff') {
+        let daysOffModal = document.querySelector('#days-off-modal');
+        daysOffModal.className = 'modal hide-element';
+    } else if(modalString == 'upload') {
+        let uploadModal = document.querySelector('#photo-upload-modal');
+        uploadModal.className = 'modal hide-element';
+    } else {
+        let payModal = document.querySelector('#pay-modal');
+        payModal.className = 'modal hide-element';
+    }
+}
+
 const incrementTime = (timeEl, incString) => {
     let [hours, minutes] = timeEl.value.split(':').map(Number);
     let tempDate = new Date();
@@ -224,6 +240,8 @@ const setTriggers = () => {
             but.classList.toggle('off');
         });
     });
+    let closeModalButton = document.querySelector('.close-modal-button');
+    closeModalButton.addEventListener('click', () => hideModal('upload'));
     let daysOffConfirm = document.querySelector('#days-off-confirm');
     daysOffConfirm.addEventListener('click', () => {
         let buts = document.querySelectorAll('.days-off-day-button');
@@ -287,19 +305,6 @@ const setTriggers = () => {
         showModal('photo');
     });
 
-    const hideModal = (modalString) => {
-        let wrapper = document.querySelector('.modal-wrapper');
-        wrapper.className = 'modal-wrapper hide-element';
-        document.body.style.overflow = 'auto';
-        if(modalString == 'daysOff') {
-            let daysOffModal = document.querySelector('#days-off-modal');
-            daysOffModal.className = 'modal hide-element';
-        } else {
-            let payModal = document.querySelector('#pay-modal');
-            payModal.className = 'modal hide-element';
-        }
-    }
-
     async function toBase64(file) {
         return new Promise((resolve, reject) => {
           const reader = new FileReader();
@@ -310,17 +315,18 @@ const setTriggers = () => {
       }
       
       document.getElementById("analyze-button").addEventListener("click", async () => {
-        const spinner = document.createElement('div');
-        const analyzeButton = document.getElementById('analyze-button');
-        spinner.classList.add('spinner');
-        analyzeButton.textContent = 'Analyzing...';
-        analyzeButton.appendChild(spinner);
         const file = document.getElementById("upload-button").files[0];
         if (!file) return alert("Pick a file first!");
       
         // ✅ Get current logged-in user
         const user = window.netlifyIdentity.currentUser();
         if (!user) return alert("You must be logged in!");
+
+        const spinner = document.createElement('div');
+        const analyzeButton = document.getElementById('analyze-button');
+        spinner.classList.add('spinner');
+        analyzeButton.textContent = 'Analyzing...';
+        analyzeButton.appendChild(spinner);
 
         // Convert file to base64
         const imageBase64 = await toBase64(file);
