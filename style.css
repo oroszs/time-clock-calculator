@@ -548,6 +548,18 @@ h2, h3, p {
     }
 }
 @media screen and (max-width: 600px) {
+    .modal#photo-upload-modal .heading {
+        font-size: 25px;
+        width: 90%;
+    }
+    .modal#photo-upload-modal .subheading {
+        width: 90%;
+        font-size: 13px;
+    }
+    #upload-button {
+        width: 230px;
+        font-size: 15px;
+    }
     .modal {
         height: 400px;
         width: 250px;
