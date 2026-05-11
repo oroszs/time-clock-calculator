@@ -2,7 +2,7 @@
     --time-wrapper-background: rgb(22, 82, 37);
     --selected-button: rgb(1, 18, 5);
     --light-bg: rgb(79, 221, 95);
-    --modal-bg: #c4f3c7;
+    --modal-bg: #b8ffbd;
     --main-element-shadow: 7px 7px 10px rgba(10, 110, 37, 0.319);
     --main-bg: rgb(212, 255, 215);
 }
@@ -126,9 +126,6 @@ h2, h3, p {
     height: 100%;
     width: 100%;
 }
-.modal#photo-upload-modal .heading {
-    font-size: 30px;
-}
 .close-modal-button {
     text-align: center;
     position: absolute;
@@ -154,7 +151,7 @@ h2, h3, p {
 }
 .heading {
     text-align: center;
-    font-size: 30pt;
+    font-size: 30px;
 }
 .sub-heading {
     margin: 0;
@@ -172,6 +169,7 @@ h2, h3, p {
     margin-right: 20px;
     border-radius: 10px;
     font-weight: 700;
+    box-shadow: var(--main-element-shadow);
 }
 #upload-button::file-selector-button:hover {
     cursor: pointer;
@@ -179,6 +177,7 @@ h2, h3, p {
 #upload-button {
     width: 300px;
     font-size: 20px;
+    padding: 20px;
 }
 .spinner {
     width: 20px;
@@ -199,8 +198,9 @@ h2, h3, p {
     box-sizing: border-box;
     width: 500px;
     height: 500px;
-    background-color: #9ae485;
-    border-radius: 20px;
+    background-color: var(--modal-bg);
+    border: 2px solid black;
+    border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.542);
     display: flex;
     flex-direction: column;
@@ -226,17 +226,18 @@ h2, h3, p {
     justify-content: center;
     align-items: center;
     font-size: 30pt;
-    color: white;
-    background: var(--time-wrapper-background);
+    color: black;
+    background: var(--light-bg);
     border-radius: 10px;
     display: flex;
-    width: 100px;
-    height: 75px;
+    width: 90px;
+    height: 70px;
     margin: 5px;
-    box-shadow: 0px 0px 7px rgba(0, 100, 0, 0.76);
+    box-shadow: 5px 5px 5px rgb(53 53 53 / 20%);
 }
 .off {
-    background-color: var(--selected-button);
+    color: white;
+    background-color: var(--time-wrapper-background);
 }
 .hour-heading {
     background: var(--light-bg);
