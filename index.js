@@ -82,20 +82,12 @@ const showModal = (modalString) => {
     }
 }
 
-const hideModal = (modalString) => {
+const hideModal = () => {
     let wrapper = document.querySelector('.modal-wrapper');
     wrapper.className = 'modal-wrapper hide-element';
     document.body.style.overflow = 'auto';
-    if(modalString == 'daysOff') {
-        let daysOffModal = document.querySelector('#days-off-modal');
-        daysOffModal.className = 'modal hide-element';
-    } else if(modalString == 'upload') {
-        let uploadModal = document.querySelector('#photo-upload-modal');
-        uploadModal.className = 'modal hide-element';
-    } else {
-        let payModal = document.querySelector('#pay-modal');
-        payModal.className = 'modal hide-element';
-    }
+    let modal = document.querySelector('.modal:not(.hide-element)');
+    modal.className = 'modal hide-element';
 }
 
 const incrementTime = (timeEl, incString) => {
@@ -236,12 +228,32 @@ const setTriggers = () => {
     });
     let daysOffButtons = document.querySelectorAll('.days-off-day-button');
     daysOffButtons.forEach(but => {
-        but.addEventListener('click', () => {
+        but.addEventListener('click', (e) => {
+            e.stopPropagation();
             but.classList.toggle('off');
         });
     });
-    let closeModalButton = document.querySelector('.close-modal-button');
-    closeModalButton.addEventListener('click', () => hideModal('upload'));
+    let modalWrapper = document.querySelector('.modal-wrapper');
+    modalWrapper.addEventListener('click', (e) => {
+        if(e.target !== modalWrapper) return;
+        let confirmButton = document.querySelector('.modal:not(.hide-element) .confirm-button');
+        if(confirmButton) {
+            confirmButton.click();
+        } else {
+            hideModal();
+        }
+    });
+    let closeModalButtons = document.querySelectorAll('.close-modal-button');
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            let confirmButton = document.querySelector('.modal:not(.hide-element) .confirm-button');
+            if(confirmButton) {
+                confirmButton.click();
+            } else {
+                hideModal();
+            }
+        });
+    });
     let daysOffConfirm = document.querySelector('#days-off-confirm');
     daysOffConfirm.addEventListener('click', () => {
         let buts = document.querySelectorAll('.days-off-day-button');
@@ -252,7 +264,7 @@ const setTriggers = () => {
         applySettings('daysOff', str);
         saveSettings('daysOff', str);
         calculate();
-        hideModal('daysOff');
+        hideModal();
     });
     let payConfirm = document.querySelector('#pay-confirm');
     payConfirm.addEventListener('click', () => {
@@ -261,13 +273,13 @@ const setTriggers = () => {
             applySettings('pay', payNum);
             saveSettings('pay', payNum);
             calculate();
-            hideModal('pay');
+            hideModal();
         }
         else{
             applySettings('pay', null);
             saveSettings('pay', null);
             calculate();
-            hideModal('pay');
+            hideModal();
         }
     });
     let payRemove = document.querySelector('#pay-remove');
@@ -275,7 +287,7 @@ const setTriggers = () => {
         applySettings('pay', null);
         saveSettings('pay', null);
         calculate();
-        hideModal('pay');
+        hideModal();
     });
     let showHoursButton = document.querySelector('#show-hours-wrapper');
     showHoursButton.addEventListener('click', () => {
