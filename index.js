@@ -310,6 +310,11 @@ const setTriggers = () => {
       }
       
       document.getElementById("analyze-button").addEventListener("click", async () => {
+        const spinner = document.createElement('div');
+        const analyzeButton = document.getElementById('analyze-button');
+        spinner.classList.add('spinner');
+        analyzeButton.textContent = 'Analyzing...';
+        analyzeButton.appendChild(spinner);
         const file = document.getElementById("upload-button").files[0];
         if (!file) return alert("Pick a file first!");
       
@@ -334,6 +339,8 @@ const setTriggers = () => {
         });
       
         const data = await res.json();
+        analyzeButton.querySelector('.spinner').remove();
+        analyzeButton.textContent = 'Analyze';
         console.log(data);
       });
       

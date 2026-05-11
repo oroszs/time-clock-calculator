@@ -126,9 +126,50 @@ h2, h3, p {
     height: 100%;
     width: 100%;
 }
+.modal#photo-upload-modal .heading {
+    font-size: 30px;
+}
+#analyze-button {
+    display: flex;
+    flex-direction: row;
+    max-width: initial;
+}
 .heading {
     text-align: center;
     font-size: 30pt;
+}
+.sub-heading {
+    margin: 0;
+    margin-top: 10px;
+    text-align: center;
+}
+#upload-button::file-selector-button {
+    all: unset;
+    background-color: var(--time-wrapper-background);
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-right: 20px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+#upload-button {
+    width: 300px;
+    font-size: 20px;
+}
+.spinner {
+    width: 20px;
+    height: 20px;
+    animation: spinner-anim 0.8s linear infinite;
+    border: 5px solid rgba(128, 128, 128, 0.385);
+    border-top: 5px solid white;
+    border-radius: 50%;
+}
+
+@keyframes spinner-anim {
+    to {
+        transform: rotate(360deg);
+    }
 }
 .modal {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
