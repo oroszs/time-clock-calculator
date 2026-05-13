@@ -232,8 +232,8 @@ const analyzeData = (dataString) => {
                 daySortObj[currentDayIndex].punches.push({string: punch});
             }
         });
-        if(!foundDay) {
-            if(currentDay !== dayInfo.day && currentDay !== null) {
+        if(!foundDay && punch.includes('E')) {
+            if(currentDay !== 'wednesday' && currentDay !== null) {
                 previousDay = currentDay;
                 currentDayIndex++;
             }
