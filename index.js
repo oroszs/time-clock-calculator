@@ -217,28 +217,30 @@ const analyzeData = (dataString) => {
     let currentDay = null;
     let previousDay = null;
     let currentDayIndex = 0;
+    let foundDay = false;
     dataArray.forEach(punch => {
+        foundDay = false;
         week.forEach(dayInfo => {
             if(punch.includes(dayInfo.key)) {
+                foundDay = true;
                 if(currentDay !== dayInfo.day && currentDay !== null) {
                     previousDay = currentDay;
                     currentDayIndex++;
                 }
                 currentDay = dayInfo.day;
-                if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {};
-                daySortObj[currentDayIndex].day = dayInfo.day;
-                daySortObj[currentDayIndex].string = punch;
-            } else if(punch.includes('E')) {
-                if(currentDay !== dayInfo.day && currentDay !== null) {
-                    previousDay = currentDay;
-                    currentDayIndex++;
-                }
-                currentDay = 'wednesday';
-                if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {};
-                daySortObj[currentDayIndex].day = currentDay;
-                daySortObj[currentDayIndex].string = punch;
+                if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {day: currentDay, punches = []};
+                daySortObj[currentDayIndex].punches.push({string: punch});
             }
         });
+        if(!foundDay) {
+            if(currentDay !== dayInfo.day && currentDay !== null) {
+                previousDay = currentDay;
+                currentDayIndex++;
+            }
+            currentDay = 'wednesday';
+            if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {day: currentDay, punches = []};
+            daySortObj[currentDayIndex].punches.push({string: punch});
+        }
     });
     alert(`Sorted Data: ${JSON.stringify(daySortObj)}`);
 }
