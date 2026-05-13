@@ -228,7 +228,7 @@ const analyzeData = (dataString) => {
                     currentDayIndex++;
                 }
                 currentDay = dayInfo.day;
-                if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {day: currentDay, punches = []};
+                if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {day: currentDay, punches : []};
                 daySortObj[currentDayIndex].punches.push({string: punch});
             }
         });
@@ -238,7 +238,7 @@ const analyzeData = (dataString) => {
                 currentDayIndex++;
             }
             currentDay = 'wednesday';
-            if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {day: currentDay, punches = []};
+            if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {day: currentDay, punches : []};
             daySortObj[currentDayIndex].punches.push({string: punch});
         }
     });
