@@ -242,6 +242,7 @@ const analyzeData = (dataString) => {
             daySortObj[currentDayIndex].punches.push({string: punch});
         }
     });
+    console.log(`Sorted Data: ${JSON.stringify(daySortObj)}`);
     alert(`Sorted Data: ${JSON.stringify(daySortObj)}`);
 }
 
