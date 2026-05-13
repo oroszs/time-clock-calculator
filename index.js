@@ -181,6 +181,66 @@ const calculate = () => {
     }
 }
 
+const analyzeData = (dataString) => {
+    const dataArray = dataString.split('\n');
+    let daySortObj = {};
+    const week = [
+        {
+            day: 'sunday',
+            key: 'SU'
+        }, 
+        {
+            day: 'monday',
+            key: 'MO'
+        }, 
+        {
+            day: 'tuesday',
+            key: 'TU'
+        }, 
+        {
+            day: 'wednesday',
+            key: 'WE'
+        }, 
+        {
+            day: 'thursday',
+            key: 'TH'
+        }, 
+        {
+            day: 'friday',
+            key: 'FR'
+        }, 
+        {
+            day: 'saturday',
+            key: 'SA'
+        },
+    ];
+    currentDay = null;
+    previousDay = null;
+    currentDayIndex = 0;
+    dataArray.forEach(punch => {
+        week.forEach(dayInfo => {
+            if(punch.includes(dayInfo.key)) {
+                if(currentDay !== dayInfo.day && currentDay !== null) {
+                    previousDay = currentDay;
+                    currentDayIndex++;
+                }
+                currentDay = dayInfo.day;
+                daySortObj[currentDayIndex].day = dayInfo.day;
+                daySortObj[currentDayIndex].string = punch;
+            } else if(punch.includes('E')) {
+                if(currentDay !== dayInfo.day && currentDay !== null) {
+                    previousDay = currentDay;
+                    currentDayIndex++;
+                }
+                currentDay = 'wednesday';
+                daySortObj[currentDayIndex].day = currentDay;
+                daySortObj[currentDayIndex].string = punch;
+            }
+        });
+    });
+    console.log(`Sorted Data: ${JSON.stringify(daySortObj)}`);
+}
+
 const setTriggers = () => {
     let timeInputs = document.querySelectorAll('input[type="time"]');
     let wfhEl = document.querySelector('#from-home-wrapper');
@@ -361,6 +421,7 @@ const setTriggers = () => {
         analyzeButton.textContent = 'Analyze';
         console.log(data);
         alert(`${data[0].description}`);
+        analyzeData(data[0].description);
       });
       
       
