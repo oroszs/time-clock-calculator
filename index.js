@@ -183,7 +183,7 @@ const calculate = () => {
 
 const analyzeData = (dataString) => {
     const dataArray = dataString.split('\n');
-    let daySortObj = {};
+    let daySortObj = [];
     const week = [
         {
             day: 'sunday',
