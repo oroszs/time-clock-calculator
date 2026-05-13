@@ -214,9 +214,9 @@ const analyzeData = (dataString) => {
             key: 'SA'
         },
     ];
-    currentDay = null;
-    previousDay = null;
-    currentDayIndex = 0;
+    let currentDay = null;
+    let previousDay = null;
+    let currentDayIndex = 0;
     dataArray.forEach(punch => {
         week.forEach(dayInfo => {
             if(punch.includes(dayInfo.key)) {
@@ -225,6 +225,7 @@ const analyzeData = (dataString) => {
                     currentDayIndex++;
                 }
                 currentDay = dayInfo.day;
+                if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {};
                 daySortObj[currentDayIndex].day = dayInfo.day;
                 daySortObj[currentDayIndex].string = punch;
             } else if(punch.includes('E')) {
@@ -233,12 +234,13 @@ const analyzeData = (dataString) => {
                     currentDayIndex++;
                 }
                 currentDay = 'wednesday';
+                if(!daySortObj[currentDayIndex]) daySortObj[currentDayIndex] = {};
                 daySortObj[currentDayIndex].day = currentDay;
                 daySortObj[currentDayIndex].string = punch;
             }
         });
     });
-    console.log(`Sorted Data: ${JSON.stringify(daySortObj)}`);
+    alert(`Sorted Data: ${JSON.stringify(daySortObj)}`);
 }
 
 const setTriggers = () => {
@@ -420,7 +422,6 @@ const setTriggers = () => {
         analyzeButton.querySelector('.spinner').remove();
         analyzeButton.textContent = 'Analyze';
         console.log(data);
-        alert(`${data[0].description}`);
         analyzeData(data[0].description);
       });
       
