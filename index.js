@@ -2,7 +2,72 @@ window.onload = () => {
     initialize();
 }
 
+const initializeDays = () => {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const mainTimeWrap = document.querySelector('#main-time-wrapper');
+    if(!mainTimeWrap) return;
+    for(const day of days) {
+        const isSunday = day === 'Sunday';
+        const dayWrap = document.createElement('div');
+        dayWrap.classList.add('day-wrapper');
+        const dayHeading = document.createElement('h2');
+        dayHeading.textContent = day;
+        const timeWrap = document.createElement('div');
+        timeWrap.classList.add('time-wrapper');
+        if(isSunday) timeWrap.classList.add('no-meal');
+        for(let i = 0; i < 4; i++) {
+            const timeDiv = document.createElement('div');
+            timeDiv.classList.add('time-div');
+            const timeHeading = document.createElement('p');
+            const timeHeadings = ['Shift Start', 'Meal Start', 'Meal End', 'Shift End'];
+            timeHeading.textContent = timeHeadings[i];
+            const timeInput = document.createElement('input');
+            timeInput.type = 'time';
+            const headClass = timeHeadings[i].toLowerCase().split(' ').join('-');
+            const dayClass = day.toLowerCase();
+            timeInput.classList.add(headClass, dayClass);
+            const timeDefaults = ['09:00', '13:00', '13:30', '18:00'];
+            if(isSunday && i === 3) {
+                timeInput.value = '17:00';
+            } else {
+                timeInput.value = timeDefaults[i];
+            }
+            const timeControls = document.createElement('div');
+            timeControls.classList.add('adjust-time-wrapper');
+            timeDiv.append(timeHeading, timeInput, timeControls);
+            for(let j = 0; j < 2; j++) {
+                const timeButton = document.createElement('button');
+                const timeButtonSymbol = document.createElement('span');
+                if(j === 0) {
+                    timeButton.classList.add('adjust-time-button', 'minus-time');
+                    timeButtonSymbol.classList.add('adjust-time-text-minus');
+                    timeButtonSymbol.textContent = '-';
+                } else {
+                    timeButton.classList.add('adjust-time-button', 'plus-time');
+                    timeButtonSymbol.classList.add('adjust-time-text-plus');
+                    timeButtonSymbol.textContent = '+';
+                }
+                timeButton.append(timeButtonSymbol);
+                timeControls.append(timeButton);
+            }
+            if(isSunday) {
+                if(i === 0 || i === 3) {
+                    timeWrap.append(timeDiv);
+                }
+            } else {
+                timeWrap.append(timeDiv);
+            }
+        }
+        const hourHeading = document.createElement('h3');
+        hourHeading.classList.add('hours');
+        hourHeading.textContent = 'Hours: ';
+        dayWrap.append(dayHeading, timeWrap, hourHeading);
+        mainTimeWrap.append(dayWrap);
+    }
+}
+
 const initialize = () => {
+    initializeDays();
     let obj = getSettings();
     if(obj.daysOff) applySettings('daysOff', obj.daysOff);
     if(obj.pay) {
