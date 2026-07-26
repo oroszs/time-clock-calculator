@@ -10,7 +10,7 @@ const initializeDays = () => {
         const isSunday = day === 'Sunday';
         const dayWrap = document.createElement('div');
         const dayClass = day.toLowerCase();
-        dayWrap.classList.add('day-wrapper', `${dayClass}`);
+        dayWrap.classList.add('day-wrapper', dayClass);
         const dayHeading = document.createElement('h2');
         dayHeading.textContent = day;
         const timeWrap = document.createElement('div');
@@ -25,8 +25,7 @@ const initializeDays = () => {
             const timeInput = document.createElement('input');
             timeInput.type = 'time';
             const headClass = timeHeadings[i].toLowerCase().split(' ').join('-');
-            const dayClass = day.toLowerCase();
-            timeInput.classList.add(headClass, dayClass);
+            timeInput.classList.add(headClass);
             const timeDefaults = ['09:00', '13:00', '13:30', '18:00'];
             if(isSunday && i === 3) {
                 timeInput.value = '17:00';
@@ -326,7 +325,10 @@ function setData(data) {
         obj[day].punches = cleanTimes;
         return obj;
     }, {});
-    console.log(cleanData);
+    for(day in cleanData) {
+        const dayEl = document.querySelector(`.${day}`);
+        const timeInputs = dayEl.querySelectorAll('');
+    }
 }
 
 const setTriggers = () => {
