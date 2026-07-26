@@ -319,7 +319,7 @@ function setData(data) {
             const timeString = punch.string.match(/\d{1,2}:\d{2}/);
             let [hour, minute] = timeString[0].split(':').map(Number);
             if(hour >= 1 || hour <= 7) hour += 12;
-            const finalTime = `${hour.padStart(2)}:${minute.padStart(2)}`;
+            const finalTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2)}`;
             arr.push(finalTime);
             return arr;
         }, []);
