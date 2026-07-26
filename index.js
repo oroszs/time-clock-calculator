@@ -322,6 +322,7 @@ function setData(data) {
             arr.push(finalTime);
             return arr;
         }, []);
+        obj[day] = [];
         obj[day].punches = cleanTimes;
         return obj;
     }, {});
