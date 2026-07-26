@@ -303,7 +303,6 @@ const analyzeData = (dataString) => {
             daySortObj[currentDayIndex].punches.push({string: punch});
         }
     });
-    console.log(JSON.stringify(daySortObj));
     setData(daySortObj);
 }
 
@@ -321,8 +320,8 @@ function setData(data) {
         obj[day].punches = cleanTimes;
         return obj;
     }, {});
-    for(const dayObj of cleanData) {
-        const dayEl = document.querySelector(`.${dayObj.day}`);
+    for(const [key, value] of Object.entries(cleanData)) {
+        const dayEl = document.querySelector(`.${key}`);
         const timeInputs = dayEl.querySelectorAll('.time');
         timeInputs.forEach((inputEl, index) => {
             inputEl.value = day.punches[index];
