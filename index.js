@@ -322,11 +322,8 @@ function setData(data) {
         return obj;
     }, {});
     for(const [key, value] of Object.entries(cleanData)) {
-        console.log('key', key, 'value', value);
         const dayEl = document.querySelector(`.${key}`);
-        console.log('day element', dayEl);
         const timeInputs = dayEl.querySelectorAll('input[type="time"]');
-        console.log('time elements', timeInputs);
         timeInputs.forEach((inputEl, index) => {
             inputEl.value = value.punches[index];
             console.log(`Input updated from ${inputEl.value} to ${value.punches[index]}`);
