@@ -316,16 +316,17 @@ function setData(data) {
             arr.push(finalTime);
             return arr;
         }, []);
-        obj[day] = [];
-        obj[day].punches = cleanTimes;
+        obj[day] = {
+            punches: cleanTimes
+        };
         return obj;
     }, {});
     for(const [key, value] of Object.entries(cleanData)) {
         const dayEl = document.querySelector(`.${key}`);
-        const timeInputs = dayEl.querySelectorAll('.time');
+        const timeInputs = dayEl.querySelectorAll('input[type="time"]');
         timeInputs.forEach((inputEl, index) => {
-            inputEl.value = day.punches[index];
-            console.log(`Input updated from ${inputEl.value} to ${day.punches[index]}`);
+            inputEl.value = value.punches[index];
+            console.log(`Input updated from ${inputEl.value} to ${value.punches[index]}`);
         });
     }
 }
