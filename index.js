@@ -321,10 +321,13 @@ function setData(data) {
         obj[day].punches = cleanTimes;
         return obj;
     }, {});
-    for(day in cleanData) {
-        const dayEl = document.querySelector(`.${day}`);
+    for(const dayObj of cleanData) {
+        const dayEl = document.querySelector(`.${dayObj.day}`);
         const timeInputs = dayEl.querySelectorAll('.time');
-        timeInputs.forEach((inputEl, index) => inputEl.value = day.punches[index]);
+        timeInputs.forEach((inputEl, index) => {
+            inputEl.value = day.punches[index];
+            console.log(`Input updated from ${inputEl.value} to ${day.punches[index]}`);
+        });
     }
 }
 
