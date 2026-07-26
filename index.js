@@ -10,7 +10,7 @@ const initializeDays = () => {
         const isSunday = day === 'Sunday';
         const dayWrap = document.createElement('div');
         const dayClass = day.toLowerCase();
-        dayWrap.classList.add(`day-wrapper ${dayClass}`);
+        dayWrap.classList.add('day-wrapper', `${dayClass}`);
         const dayHeading = document.createElement('h2');
         dayHeading.textContent = day;
         const timeWrap = document.createElement('div');
