@@ -9,7 +9,8 @@ const initializeDays = () => {
     for(const day of days) {
         const isSunday = day === 'Sunday';
         const dayWrap = document.createElement('div');
-        dayWrap.classList.add('day-wrapper');
+        const dayClass = day.toLowerCase();
+        dayWrap.classList.add(`day-wrapper ${dayClass}`);
         const dayHeading = document.createElement('h2');
         dayHeading.textContent = day;
         const timeWrap = document.createElement('div');
@@ -307,8 +308,25 @@ const analyzeData = (dataString) => {
             daySortObj[currentDayIndex].punches.push({string: punch});
         }
     });
-    console.log(`Sorted Data: ${JSON.stringify(daySortObj)}`);
-    alert(`Sorted Data: ${JSON.stringify(daySortObj)}`);
+    console.log(JSON.stringify(daySortObj));
+    setData(daySortObj);
+}
+
+function setData(data) {
+    const cleanData = data.reduce((obj, { day, punches }) => {
+        obj.day = day;
+        const cleanTimes = punches.reduce((arr, punch)=> {
+            const timeString = punch.match(/\d{1,2}:\d{2}/);
+            const [hour, minute] = timeString[0].split(':').map(Number);
+            if(hour >= 1 || hour <= 7) hour += 12;
+            const finalTime = `${hour.padStart(2)}:${minute.padStart(2)}`;
+            arr.push(finalTime);
+            return arr;
+        }, []);
+        obj.punches = cleanTimes;
+        return obj;
+    }, {});
+    console.log(cleanData);
 }
 
 const setTriggers = () => {
