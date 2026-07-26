@@ -314,7 +314,6 @@ const analyzeData = (dataString) => {
 
 function setData(data) {
     const cleanData = data.reduce((obj, { day, punches }) => {
-        obj.day = day;
         const cleanTimes = punches.reduce((arr, punch)=> {
             const timeString = punch.string.match(/\d{1,2}:\d{2}/);
             let [hour, minute] = timeString[0].split(':').map(Number);
@@ -323,7 +322,7 @@ function setData(data) {
             arr.push(finalTime);
             return arr;
         }, []);
-        obj.punches = cleanTimes;
+        obj[day].punches = cleanTimes;
         return obj;
     }, {});
     console.log(cleanData);
