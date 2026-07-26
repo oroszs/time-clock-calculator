@@ -95,7 +95,11 @@ const applySettings = (dataString, data) => {
         let days = document.querySelectorAll('.day-wrapper');
         let str = data;
         for (let i = 0; i < days.length; i++) {
-            if(str[i] === 'x') days[i].classList.add('weekend');
+            if(str[i] === 'x') {
+                days[i].classList.add('weekend');
+            } else {
+                days[i].classList.remove('weekend');
+            }
         }
         let buts = document.querySelectorAll('.days-off-day-button');
         for(let i = 0; i < buts.length; i++) {
