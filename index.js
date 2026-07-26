@@ -95,11 +95,7 @@ const applySettings = (dataString, data) => {
         let days = document.querySelectorAll('.day-wrapper');
         let str = data;
         for (let i = 0; i < days.length; i++) {
-            if(str[i] === 'x') {
-                days[i].className = "day-wrapper weekend";
-            } else {
-                days[i].className = 'day-wrapper';
-            }
+            if(str[i] === 'x') days[i].classList.add('weekend');
         }
         let buts = document.querySelectorAll('.days-off-day-button');
         for(let i = 0; i < buts.length; i++) {
@@ -327,7 +323,8 @@ function setData(data) {
     }, {});
     for(day in cleanData) {
         const dayEl = document.querySelector(`.${day}`);
-        const timeInputs = dayEl.querySelectorAll('');
+        const timeInputs = dayEl.querySelectorAll('.time');
+        timeInputs.forEach((inputEl, index) => inputEl.value = day.punches[index]);
     }
 }
 
