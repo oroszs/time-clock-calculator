@@ -317,8 +317,8 @@ function setData(data) {
         const cleanTimes = punches.reduce((arr, punch)=> {
             const timeString = punch.string.match(/\d{1,2}:\d{2}/);
             let [hour, minute] = timeString[0].split(':').map(Number);
-            if(hour >= 1 || hour <= 7) hour += 12;
-            const finalTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2)}`;
+            if(hour >= 1 && hour <= 7) hour += 12;
+            const finalTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
             arr.push(finalTime);
             return arr;
         }, []);
