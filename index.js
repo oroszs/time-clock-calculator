@@ -313,7 +313,12 @@ const analyzeData = (dataString) => {
 function setData(data) {
     const cleanData = data.reduce((obj, { day, punches }) => {
         const cleanTimes = punches.reduce((arr, punch)=> {
-            const timeString = punch.string.match(/\d{1,2}:\d{2}/);
+            let cleanedPunch = punch.string.replace(/B:/, '8:');
+            const timeString = cleanedPunch.match(/\d{1,2}:\d{2}$/);
+            if (!timeString) {
+                console.log('Could not parse:', punch.string);
+                return arr;
+            }
             let [hour, minute] = timeString[0].split(':').map(Number);
             if(hour >= 1 && hour <= 7) hour += 12;
             const finalTime = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
@@ -327,10 +332,13 @@ function setData(data) {
     }, {});
     for(const [key, value] of Object.entries(cleanData)) {
         const dayEl = document.querySelector(`.${key}`);
+        if(!dayEl) {
+            console.log(`could not find day element ${key}`);
+            continue;
+        }
         const timeInputs = dayEl.querySelectorAll('input[type="time"]');
         timeInputs.forEach((inputEl, index) => {
-            inputEl.value = value.punches[index];
-            console.log(`Input updated from ${inputEl.value} to ${value.punches[index]}`);
+            if(value.punches[index]) inputEl.value = value.punches[index];
         });
     }
 }
